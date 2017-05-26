@@ -3,6 +3,8 @@
 package com.servegame.bl4de.BL4DEUtil;
 
 import com.google.inject.Inject;
+import com.servegame.bl4de.BL4DEUtil.commands.Blade.Blade;
+import com.servegame.bl4de.BL4DEUtil.commands.Blade.BladeHelp;
 import com.servegame.bl4de.BL4DEUtil.commands.GMC;
 import com.servegame.bl4de.BL4DEUtil.commands.GMS;
 import com.servegame.bl4de.BL4DEUtil.commands.Ranks;
@@ -13,9 +15,11 @@ import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.event.game.state.GameLoadCompleteEvent;
-import org.spongepowered.api.event.game.state.GameStartedServerEvent;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.text.Text;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * File: BL4DEUtil.java
@@ -34,11 +38,6 @@ public class BL4DEUtil {
         return this.logger;
     }
 
-//    @Listener
-//    public void onServerStart(GameStartedServerEvent event){
-//        this.logger.info("Plugin has loaded!");
-//    }
-
     @Listener
     public void onLoad(GameLoadCompleteEvent event){
         this.logger.info("BL4DEUtil has loaded.");
@@ -47,21 +46,34 @@ public class BL4DEUtil {
     @Listener
     public void onInit(GameInitializationEvent event){
 
-        /* Misc */
-        this.logger.info("Plugin has initialized.");
-        CommandSpec util = CommandSpec.builder()
-                .description(Text.of("Tutorial Command"))
-                .executor(new BL4DEUtilExecutor())
-                .arguments(GenericArguments.onlyOne(GenericArguments.string(Text.of("id"))))
+        // Register /Blade
+        // /Blade help
+        CommandSpec bladeHelp = CommandSpec.builder()
+                .description(Text.of("View commands provide with BL4DEUtil"))
+                .permission("bl4de.base")
+                .executor(new BladeHelp())
                 .build();
-        this.game.getCommandManager().register(this, util, "tut", "test");
-        /* Misc */
-
+        // /Blade
+        CommandSpec blade = CommandSpec.builder()
+                .description(Text.of("Information regarding the BL4DEUtil plugin"))
+                .permission("bl4de.base")
+                .child(bladeHelp, "help", "?", "commands")
+                .executor(new Blade())
+                .build();
+        this.game.getCommandManager().register(this, blade, "blade", "bl4de");
+        this.logger.info("/Blade registered");
 
         // Register /Ranks
+        Map<String, Integer> ranksChoice = new HashMap<>();
+        ranksChoice.put("labrat", 0);
+        ranksChoice.put("technician", 1);
+        ranksChoice.put("scientist", 2);
         CommandSpec ranks = CommandSpec.builder()
                 .description(Text.of("View current ranks of the server and how they can be achieved."))
                 .permission("bl4de.ranks.base")
+                .arguments(
+                        GenericArguments.optional(GenericArguments.choices(Text.of("rank"), ranksChoice))
+                )
                 .executor(new Ranks())
                 .build();
         this.game.getCommandManager().register(this, ranks, "ranks", "rank");
@@ -84,7 +96,5 @@ public class BL4DEUtil {
                 .build();
         this.game.getCommandManager().register(this, gms, "gms");
         this.logger.info("/GMS registered");
-
-
     }
 }
