@@ -23,14 +23,14 @@ public class Blade implements CommandExecutor {
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         Text t1 = Text.of(TextColors.GRAY, "----------------------------------------------------\n");
         Text t2 = Text.of(TextColors.DARK_RED, "BL4DE");
-        Text t3 = Text.of(TextColors.BLACK, "Util\n");
+        Text t3 = Text.of(TextColors.DARK_GRAY, "Util\n");
         Text t4 = Text.of(TextColors.BLUE, "Author(s)");
         Text t5 = Text.of(TextColors.WHITE, ": ");
         Text t6 = Text.of(TextColors.GOLD, "TheCahyag\n");
         Text t7 = Text.of(TextColors.GREEN, "Commands");
         Text t8 = Text.of(TextColors.WHITE, ": /");
         Text t9 = Text.of(TextColors.GREEN, "Blade commands\n");
-        Text t10 = Text.of(TextColors.GRAY, "----------------------------------------------------\n");
+        Text t10 = Text.of(TextColors.GRAY, "----------------------------------------------------");
         Text[] tmp = {t1, t2, t3, t4, t5, t6, t7, t8, t9, t10};
         Text message = Text.builder().append(tmp).build();
         src.sendMessage(message);

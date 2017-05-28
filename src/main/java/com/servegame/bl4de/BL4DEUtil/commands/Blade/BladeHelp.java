@@ -25,7 +25,7 @@ public class BladeHelp implements CommandExecutor {
         Text t7 = Text.of(TextColors.WHITE, "/");
         Text t8 = Text.of(TextColors.GREEN, "GMS\n");
         Text t9 = Text.of(TextColors.WHITE, "/");
-        Text t10 = Text.of(TextColors.GREEN, "GMC\n");
+        Text t10 = Text.of(TextColors.GREEN, "GMC");
         Text[] tmp = {t1, t2, t3, t4, t5, t6, t7, t8, t9, t10};
         Text message = Text.builder().append(tmp).build();
         src.sendMessage(message);
