@@ -16,13 +16,18 @@ public class BladeHelp implements CommandExecutor {
 
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-        Text message = Text.of(
-                TextColors.GREEN + "Commands" + TextColors.WHITE + ":\n" +
-                        TextColors.WHITE + "/" + TextColors.GREEN + "Blade [help]\n" +
-                        TextColors.WHITE + "/" + TextColors.GREEN + "Ranks <labrat|technician|scientist>\n" +
-                        TextColors.WHITE + "/" + TextColors.GREEN + "GMS\n" +
-                        TextColors.WHITE + "/" + TextColors.GREEN + "GMC\n"
-        );
+        Text t1 = Text.of(TextColors.GREEN, "Commands");
+        Text t2 = Text.of(TextColors.WHITE, ": ([] = optional, <> = required)\n");
+        Text t3 = Text.of(TextColors.WHITE, "/");
+        Text t4 = Text.of(TextColors.GREEN, "Blade [help]\n");
+        Text t5 = Text.of(TextColors.WHITE, "/");
+        Text t6 = Text.of(TextColors.GREEN, "Ranks <labrat|technician|scientist>\n");
+        Text t7 = Text.of(TextColors.WHITE, "/");
+        Text t8 = Text.of(TextColors.GREEN, "GMS\n");
+        Text t9 = Text.of(TextColors.WHITE, "/");
+        Text t10 = Text.of(TextColors.GREEN, "GMC\n");
+        Text[] tmp = {t1, t2, t3, t4, t5, t6, t7, t8, t9, t10};
+        Text message = Text.builder().append(tmp).build();
         src.sendMessage(message);
         return CommandResult.success();
     }
