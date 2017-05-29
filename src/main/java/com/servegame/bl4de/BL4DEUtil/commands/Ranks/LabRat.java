@@ -25,7 +25,7 @@ public class LabRat implements CommandExecutor {
         Text t8 = Text.of(TextColors.YELLOW, "   ➊ Log into the server\n");
         Text t9 = Text.of(TextColors.GREEN, "Benefits");
         Text t10 = Text.of(TextColors.WHITE, ": \n");
-        Text t11 = Text.of(TextColors.YELLOW, "   ➊ One home with /sethome\n");
+        Text t11 = Text.of(TextColors.YELLOW, "   ➊ Set a home with /Sethome\n");
         Text t12 = Text.of(TextColors.YELLOW, "   ➋ /Kit Starter\n");
         Text t13 = Text.of(TextColors.YELLOW, "   ➌ Teleport to a random position with /RTP\n");
         Text t14 = Text.of(TextColors.YELLOW, "   ➍ Teleport to/from players with /TPA, /TPAHere\n");
