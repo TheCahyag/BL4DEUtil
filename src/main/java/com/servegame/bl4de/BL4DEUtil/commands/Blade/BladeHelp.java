@@ -21,7 +21,7 @@ public class BladeHelp implements CommandExecutor {
         Text t3 = Text.of(TextColors.WHITE, "/");
         Text t4 = Text.of(TextColors.GREEN, "Blade [help]\n");
         Text t5 = Text.of(TextColors.WHITE, "/");
-        Text t6 = Text.of(TextColors.GREEN, "Ranks <labrat|technician|scientist>\n");
+        Text t6 = Text.of(TextColors.GREEN, "Ranks [labrat|technician|scientist]\n");
         Text t7 = Text.of(TextColors.WHITE, "/");
         Text t8 = Text.of(TextColors.GREEN, "GMS\n");
         Text t9 = Text.of(TextColors.WHITE, "/");
