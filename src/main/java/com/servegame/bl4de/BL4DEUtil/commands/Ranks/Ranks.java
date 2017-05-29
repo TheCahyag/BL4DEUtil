@@ -1,0 +1,44 @@
+package com.servegame.bl4de.BL4DEUtil.commands.Ranks;
+
+import org.spongepowered.api.command.CommandException;
+import org.spongepowered.api.command.CommandResult;
+import org.spongepowered.api.command.CommandSource;
+import org.spongepowered.api.command.args.CommandContext;
+import org.spongepowered.api.command.spec.CommandExecutor;
+import org.spongepowered.api.text.Text;
+import org.spongepowered.api.text.format.TextColors;
+
+/**
+ * File: Ranks.java
+ * @author Brandon Bires-Navel (brandonnavel@outlook.com)
+ */
+public class Ranks implements CommandExecutor {
+
+    @Override
+    public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
+        Text t1 = Text.of(TextColors.GRAY, "----------------------------------------------------\n");
+        Text t2 = Text.of(TextColors.GREEN, "Rank");
+        Text t3 = Text.of(TextColors.WHITE, ": [");
+        Text t4 = Text.of(TextColors.AQUA, "LabRat");
+        Text t5 = Text.of(TextColors.WHITE, "]\n");
+        Text t6 = Text.of(TextColors.WHITE, "   /");
+        Text t7 = Text.of(TextColors.GRAY, "Ranks labrat\n");
+        Text t8 = Text.of(TextColors.GREEN, "Rank");
+        Text t9 = Text.of(TextColors.WHITE, ": [");
+        Text t10 = Text.of(TextColors.GOLD, "Technician");
+        Text t11 = Text.of(TextColors.WHITE, "]\n");
+        Text t12 = Text.of(TextColors.WHITE, "   /");
+        Text t13 = Text.of(TextColors.GRAY, "Ranks technician\n");
+        Text t14 = Text.of(TextColors.GREEN, "Rank");
+        Text t15 = Text.of(TextColors.WHITE, ": [");
+        Text t16 = Text.of(TextColors.DARK_BLUE, "Scientist");
+        Text t17 = Text.of(TextColors.WHITE, "]\n");
+        Text t18 = Text.of(TextColors.WHITE, "   /");
+        Text t19 = Text.of(TextColors.GRAY, "Ranks scientist\n");
+        Text t20 = Text.of(TextColors.GRAY, "----------------------------------------------------");
+        Text[] tmp = {t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20};
+        Text message = Text.builder().append(tmp).build();
+        src.sendMessage(message);
+        return CommandResult.success();
+    }
+}
