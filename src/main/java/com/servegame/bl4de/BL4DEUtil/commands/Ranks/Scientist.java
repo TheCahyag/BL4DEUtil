@@ -17,15 +17,15 @@ public class Scientist implements CommandExecutor {
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         Text t1 = Text.of(TextColors.GRAY, "--------------------");
         Text t2 = Text.of(TextColors.WHITE, "[");
-        Text t3 = Text.of(TextColors.GOLD, "Scientist");
+        Text t3 = Text.of(TextColors.DARK_BLUE, "Scientist");
         Text t4 = Text.of(TextColors.WHITE, "]");
-        Text t5 = Text.of(TextColors.GRAY, "-------------------\n");
+        Text t5 = Text.of(TextColors.GRAY, "----------------------\n");
         Text t6 = Text.of(TextColors.AQUA, "Requirements");
         Text t7 = Text.of(TextColors.WHITE, ": \n");
         Text t8 = Text.of(TextColors.YELLOW, "   ➊ Donate ");
         Text t9 = Text.of(TextColors.DARK_GREEN, "$");
         Text t10 = Text.of(TextColors.YELLOW, "15.00 ");
-        Text t11 = Text.of(TextColors.DARK_BLUE, "USD");
+        Text t11 = Text.of(TextColors.DARK_BLUE, "USD\n");
         Text t12 = Text.of(TextColors.GREEN, "Benefits");
         Text t13 = Text.of(TextColors.WHITE, ": \n");
         Text t14 = Text.of(TextColors.DARK_RED, "The following is subject to change\n");

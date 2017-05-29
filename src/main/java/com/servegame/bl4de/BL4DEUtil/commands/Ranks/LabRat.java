@@ -15,11 +15,11 @@ import org.spongepowered.api.text.format.TextColors;
 public class LabRat implements CommandExecutor {
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-        Text t1 = Text.of(TextColors.GRAY, "----------------------");
+        Text t1 = Text.of(TextColors.GRAY, "---------------------");
         Text t2 = Text.of(TextColors.WHITE, "[");
         Text t3 = Text.of(TextColors.AQUA, "LabRat");
         Text t4 = Text.of(TextColors.WHITE, "]");
-        Text t5 = Text.of(TextColors.GRAY, "----------------------\n");
+        Text t5 = Text.of(TextColors.GRAY, "------------------------\n");
         Text t6 = Text.of(TextColors.AQUA, "Requirements");
         Text t7 = Text.of(TextColors.WHITE, ": \n");
         Text t8 = Text.of(TextColors.YELLOW, "   ➊ Log into the server\n");

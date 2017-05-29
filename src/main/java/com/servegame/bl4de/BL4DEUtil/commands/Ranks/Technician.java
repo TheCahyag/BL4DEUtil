@@ -15,7 +15,7 @@ import org.spongepowered.api.text.format.TextColors;
 public class Technician implements CommandExecutor {
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-        Text t1 = Text.of(TextColors.GRAY, "--------------------");
+        Text t1 = Text.of(TextColors.GRAY, "----------------------");
         Text t2 = Text.of(TextColors.WHITE, "[");
         Text t3 = Text.of(TextColors.GOLD, "Technician");
         Text t4 = Text.of(TextColors.WHITE, "]");
