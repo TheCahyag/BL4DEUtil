@@ -7,7 +7,10 @@ import com.servegame.bl4de.BL4DEUtil.commands.Blade.Blade;
 import com.servegame.bl4de.BL4DEUtil.commands.Blade.BladeHelp;
 import com.servegame.bl4de.BL4DEUtil.commands.GMC;
 import com.servegame.bl4de.BL4DEUtil.commands.GMS;
-import com.servegame.bl4de.BL4DEUtil.commands.Ranks;
+import com.servegame.bl4de.BL4DEUtil.commands.Ranks.LabRat;
+import com.servegame.bl4de.BL4DEUtil.commands.Ranks.Ranks;
+import com.servegame.bl4de.BL4DEUtil.commands.Ranks.Scientist;
+import com.servegame.bl4de.BL4DEUtil.commands.Ranks.Technician;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.command.args.GenericArguments;
@@ -64,16 +67,33 @@ public class BL4DEUtil {
         this.logger.info("/Blade registered");
 
         // Register /Ranks
-        Map<String, Integer> ranksChoice = new HashMap<>();
-        ranksChoice.put("labrat", 0);
-        ranksChoice.put("technician", 1);
-        ranksChoice.put("scientist", 2);
+        // /Ranks LabRat
+        CommandSpec labRat = CommandSpec.builder()
+                .description(Text.of("Show information about the LabRat rank"))
+                .permission("bl4de.ranks.base")
+                .executor(new LabRat())
+                .build();
+
+        // /Ranks Technician
+        CommandSpec technician = CommandSpec.builder()
+                .description(Text.of("Show information about the Technician rank"))
+                .permission("bl4de.ranks.base")
+                .executor(new Technician())
+                .build();
+
+        // /Ranks Scientist
+        CommandSpec scientist = CommandSpec.builder()
+                .description(Text.of("Show information about the Scientist rank"))
+                .permission("bl4de.ranks.base")
+                .executor(new Scientist())
+                .build();
+        // /Ranks
         CommandSpec ranks = CommandSpec.builder()
                 .description(Text.of("View current ranks of the server and how they can be achieved."))
                 .permission("bl4de.ranks.base")
-                .arguments(
-                        GenericArguments.optional(GenericArguments.choices(Text.of("rank"), ranksChoice))
-                )
+                .child(labRat, "labrat")
+                .child(technician, "technician")
+                .child(scientist, "scientist")
                 .executor(new Ranks())
                 .build();
         this.game.getCommandManager().register(this, ranks, "ranks", "rank");
