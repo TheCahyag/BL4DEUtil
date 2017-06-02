@@ -28,7 +28,7 @@ public class Technician implements CommandExecutor {
         Text t11 = Text.of(TextColors.YELLOW, "   ➊ Set two homes with /Sethome\n");
         Text t12 = Text.of(TextColors.YELLOW, "   ➋ Use chat formatting (not colors), /Info colors\n");
         Text t13 = Text.of(TextColors.YELLOW, "   ➌ 1000 additional claim blocks\n");
-        Text t14 = Text.of(TextColors.YELLOW, "   ➍ /Enderchest\n");
+        Text t14 = Text.of(TextColors.YELLOW, "   ➍ /EC (Enderchest)\n");
         Text t15 = Text.of(TextColors.GRAY, "----------------------------------------------------");
         Text[] tmp = {t1, t2, t3, t4, t5, t6, t7, t8, t9, t10,
                 t11, t12, t13, t14, t15};
