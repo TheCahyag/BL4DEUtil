@@ -26,7 +26,12 @@ public class Blade implements CommandExecutor {
         Text t6 = Text.of(TextColors.GOLD, "TheCahyag\n");
         Text t7 = Text.of(TextColors.GREEN, "Commands");
         Text t8 = Text.of(TextColors.WHITE, ": /");
-        Text t9 = Text.builder("Blade commands\n").color(TextColors.GREEN).style(TextStyles.UNDERLINE).onClick(TextActions.runCommand("/blade commands")).build();
+        Text t9 = Text.builder("Blade commands\n")
+                .color(TextColors.GREEN)
+                .style(TextStyles.UNDERLINE)
+                .onClick(TextActions.runCommand("/blade commands"))
+                .onHover(TextActions.showText(Text.of("Click here to suggest this command.")))
+                .build();
         Text t10 = Text.of(TextColors.GRAY, "----------------------------------------------------");
         Text[] tmp = {t1, t2, t3, t4, t5, t6, t7, t8, t9, t10};
         Text message = Text.builder().append(tmp).build();
