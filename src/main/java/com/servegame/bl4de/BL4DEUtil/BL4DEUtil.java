@@ -28,7 +28,9 @@ import java.util.Map;
  * File: BL4DEUtil.java
  * @author Brandon Bires-Navel (brandonnavel@outlook.com)
  */
-@Plugin(id = "bl4deutil", name = "BL4DEUtil", version = "0.0.1")
+@Plugin(id = "bl4deutil", name = "BL4DEUtil", version = "0.0.1",
+    authors = {"TheCahyag"},
+    url = "https://github.com/TheCahyag/BL4DEUtil")
 public class BL4DEUtil {
 
     @Inject
