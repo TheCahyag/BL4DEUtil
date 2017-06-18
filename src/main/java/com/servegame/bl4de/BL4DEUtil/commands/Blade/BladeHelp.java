@@ -21,7 +21,7 @@ public class BladeHelp implements CommandExecutor {
         Text t1 = Text.of(TextColors.GREEN, "Commands");
         Text t2 = Text.of(TextColors.WHITE, ": ([] = optional, <> = required)\n");
         Text t3 = Text.of(TextColors.WHITE, "/");
-        Text t4 = Text.of(TextColors.GREEN, "Blade [help]\n");
+        Text t4 = Text.of(TextColors.GREEN, "Blade [help|debug]\n");
         Text t5 = Text.of(TextColors.WHITE, "/");
         Text t6 = Text.builder("Ranks")
                 .color(TextColors.GREEN)
