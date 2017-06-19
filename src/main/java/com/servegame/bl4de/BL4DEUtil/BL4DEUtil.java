@@ -5,6 +5,7 @@ package com.servegame.bl4de.BL4DEUtil;
 import com.google.inject.Inject;
 import com.servegame.bl4de.BL4DEUtil.commands.Blade.Blade;
 import com.servegame.bl4de.BL4DEUtil.commands.Blade.BladeHelp;
+import com.servegame.bl4de.BL4DEUtil.commands.Blade.BladeToggleDebug;
 import com.servegame.bl4de.BL4DEUtil.commands.GMC;
 import com.servegame.bl4de.BL4DEUtil.commands.GMS;
 import com.servegame.bl4de.BL4DEUtil.commands.Ranks.LabRat;
@@ -42,6 +43,7 @@ public class BL4DEUtil {
 
     @Inject private Game game;
     @Inject private Logger logger;
+    public static boolean debug = false;
 
     @Inject
     @DefaultConfig(sharedRoot = true)
@@ -68,6 +70,12 @@ public class BL4DEUtil {
     public void onInit(GameInitializationEvent event){
         /* Command Register START */
         // Register /Blade
+        // /Blade debug
+        CommandSpec bladeDebug = CommandSpec.builder()
+                .description(Text.of("Toggles the debug mode for BL4DEUtil"))
+                .permission("bl4de.debug.base")
+                .executor(new BladeToggleDebug())
+                .build();
         // /Blade help
         CommandSpec bladeHelp = CommandSpec.builder()
                 .description(Text.of("View commands provide with BL4DEUtil"))
@@ -79,6 +87,7 @@ public class BL4DEUtil {
                 .description(Text.of("Information regarding the BL4DEUtil plugin"))
                 .permission("bl4de.base")
                 .child(bladeHelp, "help", "?", "commands")
+                .child(bladeDebug, "debug", "d")
                 .executor(new Blade())
                 .build();
         this.game.getCommandManager().register(this, blade, "blade", "bl4de");
