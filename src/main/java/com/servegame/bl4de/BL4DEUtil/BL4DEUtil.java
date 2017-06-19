@@ -3,15 +3,15 @@
 package com.servegame.bl4de.BL4DEUtil;
 
 import com.google.inject.Inject;
-import com.servegame.bl4de.BL4DEUtil.commands.Blade.Blade;
-import com.servegame.bl4de.BL4DEUtil.commands.Blade.BladeHelp;
-import com.servegame.bl4de.BL4DEUtil.commands.Blade.BladeToggleDebug;
+import com.servegame.bl4de.BL4DEUtil.commands.blade.Blade;
+import com.servegame.bl4de.BL4DEUtil.commands.blade.BladeHelp;
+import com.servegame.bl4de.BL4DEUtil.commands.blade.BladeToggleDebug;
 import com.servegame.bl4de.BL4DEUtil.commands.GMC;
 import com.servegame.bl4de.BL4DEUtil.commands.GMS;
-import com.servegame.bl4de.BL4DEUtil.commands.Ranks.LabRat;
-import com.servegame.bl4de.BL4DEUtil.commands.Ranks.Ranks;
-import com.servegame.bl4de.BL4DEUtil.commands.Ranks.Scientist;
-import com.servegame.bl4de.BL4DEUtil.commands.Ranks.Technician;
+import com.servegame.bl4de.BL4DEUtil.commands.ranks.LabRat;
+import com.servegame.bl4de.BL4DEUtil.commands.ranks.Ranks;
+import com.servegame.bl4de.BL4DEUtil.commands.ranks.Scientist;
+import com.servegame.bl4de.BL4DEUtil.commands.ranks.Technician;
 import com.servegame.bl4de.BL4DEUtil.eventhandlers.BL4DEEventHandler;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
@@ -69,20 +69,20 @@ public class BL4DEUtil {
     @Listener
     public void onInit(GameInitializationEvent event){
         /* Command Register START */
-        // Register /Blade
-        // /Blade debug
+        // Register /blade
+        // /blade debug
         CommandSpec bladeDebug = CommandSpec.builder()
                 .description(Text.of("Toggles the debug mode for BL4DEUtil"))
                 .permission("bl4de.debug.base")
                 .executor(new BladeToggleDebug())
                 .build();
-        // /Blade help
+        // /blade help
         CommandSpec bladeHelp = CommandSpec.builder()
                 .description(Text.of("View commands provide with BL4DEUtil"))
                 .permission("bl4de.base")
                 .executor(new BladeHelp())
                 .build();
-        // /Blade
+        // /blade
         CommandSpec blade = CommandSpec.builder()
                 .description(Text.of("Information regarding the BL4DEUtil plugin"))
                 .permission("bl4de.base")
@@ -91,30 +91,30 @@ public class BL4DEUtil {
                 .executor(new Blade())
                 .build();
         this.game.getCommandManager().register(this, blade, "blade", "bl4de");
-        this.logger.info("/Blade registered");
+        this.logger.info("/blade registered");
 
-        // Register /Ranks
-        // /Ranks LabRat
+        // Register /ranks
+        // /ranks LabRat
         CommandSpec labRat = CommandSpec.builder()
                 .description(Text.of("Show information about the LabRat rank"))
                 .permission("bl4de.ranks.base")
                 .executor(new LabRat())
                 .build();
 
-        // /Ranks Technician
+        // /ranks Technician
         CommandSpec technician = CommandSpec.builder()
                 .description(Text.of("Show information about the Technician rank"))
                 .permission("bl4de.ranks.base")
                 .executor(new Technician())
                 .build();
 
-        // /Ranks Scientist
+        // /ranks Scientist
         CommandSpec scientist = CommandSpec.builder()
                 .description(Text.of("Show information about the Scientist rank"))
                 .permission("bl4de.ranks.base")
                 .executor(new Scientist())
                 .build();
-        // /Ranks
+        // /ranks
         CommandSpec ranks = CommandSpec.builder()
                 .description(Text.of("View current ranks of the server and how they can be achieved."))
                 .permission("bl4de.ranks.base")
@@ -124,7 +124,7 @@ public class BL4DEUtil {
                 .executor(new Ranks())
                 .build();
         this.game.getCommandManager().register(this, ranks, "ranks", "rank");
-        this.logger.info("/Ranks registered");
+        this.logger.info("/ranks registered");
 
         // Register /GMC
         CommandSpec gmc = CommandSpec.builder()

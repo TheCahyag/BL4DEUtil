@@ -1,4 +1,4 @@
-package com.servegame.bl4de.BL4DEUtil.commands.Ranks;
+package com.servegame.bl4de.BL4DEUtil.commands.ranks;
 
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
@@ -10,10 +10,8 @@ import org.spongepowered.api.text.action.TextActions;
 import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.text.format.TextStyles;
 
-import javax.swing.text.TextAction;
-
 /**
- * File: Ranks.java
+ * File: ranks.java
  * @author Brandon Bires-Navel (brandonnavel@outlook.com)
  */
 public class Ranks implements CommandExecutor {
@@ -26,7 +24,7 @@ public class Ranks implements CommandExecutor {
         Text t4 = Text.of(TextColors.AQUA, "LabRat");
         Text t5 = Text.of(TextColors.WHITE, "]\n");
         Text t6 = Text.of(TextColors.WHITE, "   /");
-        Text t7 = Text.builder("Ranks labrat\n")
+        Text t7 = Text.builder("ranks labrat\n")
                 .color(TextColors.GREEN)
                 .style(TextStyles.UNDERLINE)
                 .onClick(TextActions.runCommand("/ranks labrat"))
@@ -37,7 +35,7 @@ public class Ranks implements CommandExecutor {
         Text t10 = Text.of(TextColors.GOLD, "Technician");
         Text t11 = Text.of(TextColors.WHITE, "]\n");
         Text t12 = Text.of(TextColors.WHITE, "   /");
-        Text t13 = Text.builder("Ranks technician\n")
+        Text t13 = Text.builder("ranks technician\n")
                 .color(TextColors.GREEN)
                 .style(TextStyles.UNDERLINE)
                 .onClick(TextActions.runCommand("/ranks technician"))
@@ -48,7 +46,7 @@ public class Ranks implements CommandExecutor {
         Text t16 = Text.of(TextColors.DARK_BLUE, "Scientist");
         Text t17 = Text.of(TextColors.WHITE, "]\n");
         Text t18 = Text.of(TextColors.WHITE, "   /");
-        Text t19 = Text.builder("Ranks scientist\n")
+        Text t19 = Text.builder("ranks scientist\n")
                 .color(TextColors.GREEN)
                 .style(TextStyles.UNDERLINE)
                 .onClick(TextActions.runCommand("/ranks scientist"))

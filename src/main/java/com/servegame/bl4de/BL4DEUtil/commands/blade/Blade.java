@@ -1,4 +1,4 @@
-package com.servegame.bl4de.BL4DEUtil.commands.Blade;
+package com.servegame.bl4de.BL4DEUtil.commands.blade;
 
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
@@ -11,7 +11,7 @@ import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.text.format.TextStyles;
 
 /**
- * File: Blade.java
+ * File: blade.java
  * @author Brandon Bires-Navel (brandonnavel@outlook.com)
  */
 public class Blade implements CommandExecutor {
@@ -26,7 +26,7 @@ public class Blade implements CommandExecutor {
         Text t6 = Text.of(TextColors.GOLD, "TheCahyag\n");
         Text t7 = Text.of(TextColors.GREEN, "Commands");
         Text t8 = Text.of(TextColors.WHITE, ": /");
-        Text t9 = Text.builder("Blade commands\n")
+        Text t9 = Text.builder("blade commands\n")
                 .color(TextColors.GREEN)
                 .style(TextStyles.UNDERLINE)
                 .onClick(TextActions.runCommand("/blade commands"))

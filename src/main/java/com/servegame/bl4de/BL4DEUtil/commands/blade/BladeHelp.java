@@ -1,4 +1,4 @@
-package com.servegame.bl4de.BL4DEUtil.commands.Blade;
+package com.servegame.bl4de.BL4DEUtil.commands.blade;
 
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
@@ -21,9 +21,9 @@ public class BladeHelp implements CommandExecutor {
         Text t1 = Text.of(TextColors.GREEN, "Commands");
         Text t2 = Text.of(TextColors.WHITE, ": ([] = optional, <> = required)\n");
         Text t3 = Text.of(TextColors.WHITE, "/");
-        Text t4 = Text.of(TextColors.GREEN, "Blade [help|debug]\n");
+        Text t4 = Text.of(TextColors.GREEN, "blade [help|debug]\n");
         Text t5 = Text.of(TextColors.WHITE, "/");
-        Text t6 = Text.builder("Ranks")
+        Text t6 = Text.builder("ranks")
                 .color(TextColors.GREEN)
                 .style(TextStyles.UNDERLINE)
                 .onClick(TextActions.runCommand("/ranks"))
