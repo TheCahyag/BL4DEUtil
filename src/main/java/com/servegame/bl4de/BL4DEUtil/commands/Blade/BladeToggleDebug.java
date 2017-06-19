@@ -1,4 +1,4 @@
-package com.servegame.bl4de.BL4DEUtil.commands;
+package com.servegame.bl4de.BL4DEUtil.commands.Blade;
 
 import com.servegame.bl4de.BL4DEUtil.BL4DEUtil;
 import org.spongepowered.api.command.CommandException;
@@ -10,10 +10,10 @@ import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 
 /**
- * File: ToggleDebug.java
+ * File: BladeToggleDebug.java
  * @author Brandon Bires-Navel (brandonnavel@outlook.com)
  */
-public class ToggleDebug implements CommandExecutor {
+public class BladeToggleDebug implements CommandExecutor {
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         BL4DEUtil.debug = !BL4DEUtil.debug;
