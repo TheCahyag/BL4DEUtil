@@ -1,4 +1,4 @@
-package com.servegame.bl4de.BL4DEUtil.eventhandlers;
+package com.servegame.bl4de.BL4DEUtil.listener;
 
 import com.servegame.bl4de.BL4DEUtil.BL4DEUtil;
 import org.spongepowered.api.block.BlockType;
@@ -15,10 +15,10 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 /**
- * File: BlockPlace.java
+ * File: ChangeBlockEventPlaceEvent.java
  * @author Brandon Bires-Navel (brandonnavel@outlook.com)
  */
-public class BlockPlace {
+public class ChangeBlockEventPlaceEvent {
     private final static String searchFor = "extrautils2:chunkloader";
     private static ArrayList<String> activateOnTheseBlocks = new ArrayList<>();
 
@@ -43,13 +43,14 @@ public class BlockPlace {
         World           world = location.getExtent();
 
         if (BL4DEUtil.debug){
-            player.sendMessage(Text.of(location.getBlockType().getId()));
+            player.sendMessage(Text.of("ID: " + location.getBlockType().getId()));
+            player.sendMessage(Text.of("BlockType.toString: " + event.getTransactions().get(0).getFinal().getState().getType().toString()));
         }
 
-        BlockPlace.activateOnTheseBlocks.add("ae2stuff:Encoder");
-        BlockPlace.activateOnTheseBlocks.add("ae2stuff:Grower");
-        BlockPlace.activateOnTheseBlocks.add("ae2stuff:Inscriber");
-        BlockPlace.activateOnTheseBlocks.add("ae2stuff:Wireless");
+        ChangeBlockEventPlaceEvent.activateOnTheseBlocks.add("ae2stuff:Encoder");
+        ChangeBlockEventPlaceEvent.activateOnTheseBlocks.add("ae2stuff:Grower");
+        ChangeBlockEventPlaceEvent.activateOnTheseBlocks.add("ae2stuff:Inscriber");
+        ChangeBlockEventPlaceEvent.activateOnTheseBlocks.add("ae2stuff:Wireless");
 
         // Check what block was placed
         if (!activateOnTheseBlocks.contains(location.getBlockType().getId())){
@@ -104,7 +105,7 @@ public class BlockPlace {
     }
 
     /**
-     * searchChunk searches the 3d space of a chunk in search of {@link BlockPlace#searchFor}
+     * searchChunk searches the 3d space of a chunk in search of {@link ChangeBlockEventPlaceEvent#searchFor}
      * @param chunk - the given {@link Chunk}
      * @return - boolean - whether or not the block was found in the given chunk
      */
@@ -127,15 +128,5 @@ public class BlockPlace {
             }
         }
         return hasBlock;
-    }
-
-    /**
-     * just used for debug stuff, sometimes...
-     * @param x x
-     * @param y y
-     * @param z z
-     */
-    private static void printCoords(int x, int y, int z){
-        System.out.println("X: " + x + " Y: " + y + " Z: " + z);
     }
 }
