@@ -1,6 +1,6 @@
 package com.servegame.bl4de.BL4DEUtil.commands;
 
-import com.servegame.bl4de.BL4DEUtil.util.FileIO.FileParser;
+import com.servegame.bl4de.BL4DEUtil.util.FileIO.LastOnlineFileParser;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -20,7 +20,7 @@ public class LastOnline implements CommandExecutor {
 
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-        Optional<Map<Date, String>> optionalPlayerData = FileParser.getRecentPlayerLogins();
+        Optional<Map<Date, String>> optionalPlayerData = LastOnlineFileParser.getRecentPlayerLogins();
         if (!optionalPlayerData.isPresent()){
             src.sendMessage(Text.of(TextColors.AQUA, "No player entries were found. (It probably couldn't access the file)"));
             return CommandResult.empty();

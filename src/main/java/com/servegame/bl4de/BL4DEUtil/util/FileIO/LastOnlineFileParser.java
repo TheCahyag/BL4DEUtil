@@ -10,11 +10,11 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * File: FileParser.java
+ * File: LastOnlineFileParser.java
  *
  * @author Brandon Bires-Navel (brandonnavel@outlook.com)
  */
-public class FileParser {
+public class LastOnlineFileParser {
 
     private static Logger logger;
     private static BL4DEUtil util;
@@ -22,10 +22,10 @@ public class FileParser {
     private final static DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss z");
 
     /**
-     * FileParser constructor
+     * LastOnlineFileParser constructor
      * @param plugin - BL4DEUtil - to reference logger and such
      */
-    public FileParser(BL4DEUtil plugin){
+    public LastOnlineFileParser(BL4DEUtil plugin){
         logger = plugin.getLogger();
         util = plugin;
     }
@@ -39,7 +39,7 @@ public class FileParser {
         File file = new File(util.getRecentPlayersDataFile());
         // The map is <Date, String> so the tree map will sort the map automatically by date
         Map<Date, String> players = new TreeMap<>();
-        synchronized (FileParser.class) {
+        synchronized (LastOnlineFileParser.class) {
             try (Scanner in = new Scanner(file)) {
                 while (in.hasNextLine()) {
                     // Line format: PLAYER_NAME DATE
@@ -62,7 +62,7 @@ public class FileParser {
      * @param name - String - the name of the player
      */
     public static void logPlayerJoin(String name){
-        synchronized (FileParser.class){
+        synchronized (LastOnlineFileParser.class){
             Optional<Map<Date, String>> mapOptional = getRecentPlayerLogins();
             Map<Date, String> data;
             if (!mapOptional.isPresent()){
