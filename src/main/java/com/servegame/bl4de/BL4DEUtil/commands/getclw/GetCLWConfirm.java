@@ -73,7 +73,7 @@ public class GetCLWConfirm implements CommandExecutor {
         } else {
             Optional<ItemType> optionalType = this.game.getRegistry().getType(ItemType.class, "extrautils2:chunkloader");
             if (!optionalType.isPresent()){
-                player.sendMessage(Text.of(TextColors.AQUA, "This item is not available, please contact the admins."));
+                player.sendMessage(Text.of(TextColors.AQUA, "This item is not available, please contact the admins. (extrautils2:chunkloader)"));
                 return CommandResult.empty();
             }
             ItemType type = optionalType.get();
