@@ -18,6 +18,7 @@ import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 
 import java.util.Iterator;
+import java.util.Optional;
 
 /**
  * File: GetCLWConfirm.java
@@ -70,7 +71,12 @@ public class GetCLWConfirm implements CommandExecutor {
                     "You do not have enough emeralds to complete this transaction. " +
                             "Make sure all emeralds are in the same stack"));
         } else {
-            ItemType type = this.game.getRegistry().getType(ItemType.class, "extrautils2:chunkloader").get();
+            Optional<ItemType> optionalType = this.game.getRegistry().getType(ItemType.class, "extrautils2:chunkloader");
+            if (!optionalType.isPresent()){
+                player.sendMessage(Text.of(TextColors.AQUA, "This item is not available, please contact the admins."));
+                return CommandResult.empty();
+            }
+            ItemType type = optionalType.get();
             ItemStack item = ItemStack.of(type, 1);
             player.getInventory().offer(item);
         }
