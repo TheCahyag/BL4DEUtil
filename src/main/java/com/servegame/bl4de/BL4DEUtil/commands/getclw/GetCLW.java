@@ -22,7 +22,7 @@ public class GetCLW implements CommandExecutor {
             src.sendMessage(Text.of("This command is meant only for players."));
             return CommandResult.empty();
         }
-        ((Player) src).sendMessage(Text.of(TextColors.AQUA,
+        src.sendMessage(Text.of(TextColors.AQUA,
                 "In exchange for 3 emeralds, you will receive one Chunk Loading Ward " +
                         "(From ExtraUtils2). /GetCLW Confirm"));
         return CommandResult.success();
