@@ -3,16 +3,20 @@
 package com.servegame.bl4de.BL4DEUtil;
 
 import com.google.inject.Inject;
+import com.servegame.bl4de.BL4DEUtil.commands.LastOnline;
 import com.servegame.bl4de.BL4DEUtil.commands.blade.Blade;
 import com.servegame.bl4de.BL4DEUtil.commands.blade.BladeHelp;
 import com.servegame.bl4de.BL4DEUtil.commands.blade.BladeToggleDebug;
 import com.servegame.bl4de.BL4DEUtil.commands.GMC;
 import com.servegame.bl4de.BL4DEUtil.commands.GMS;
+import com.servegame.bl4de.BL4DEUtil.commands.getclw.GetCLW;
+import com.servegame.bl4de.BL4DEUtil.commands.getclw.GetCLWConfirm;
 import com.servegame.bl4de.BL4DEUtil.commands.ranks.LabRat;
 import com.servegame.bl4de.BL4DEUtil.commands.ranks.Ranks;
 import com.servegame.bl4de.BL4DEUtil.commands.ranks.Scientist;
 import com.servegame.bl4de.BL4DEUtil.commands.ranks.Technician;
-import com.servegame.bl4de.BL4DEUtil.eventhandlers.BL4DEEventHandler;
+import com.servegame.bl4de.BL4DEUtil.util.BL4DEListenerHandler;
+import com.servegame.bl4de.BL4DEUtil.util.FileIO.LastOnlineFileParser;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
 import org.slf4j.Logger;
@@ -25,9 +29,13 @@ import org.spongepowered.api.event.block.ChangeBlockEvent;
 import org.spongepowered.api.event.filter.cause.Root;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.event.game.state.GameLoadCompleteEvent;
+import org.spongepowered.api.event.network.ClientConnectionEvent;
 import org.spongepowered.api.plugin.Plugin;
+import org.spongepowered.api.service.sql.SqlService;
 import org.spongepowered.api.text.Text;
 
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 
 /**
@@ -39,7 +47,11 @@ import java.nio.file.Path;
     url = "https://github.com/TheCahyag/BL4DEUtil")
 public class BL4DEUtil {
 
-    private BL4DEEventHandler eventHandler;
+    private BL4DEListenerHandler eventHandler;
+    private SqlService sql;
+
+    private final String configDir = "./config/bl4deutil";
+    private final String recentPlayersDataDir = "./config/bl4deutil/recent_player_logins.dat";
 
     @Inject private Game game;
     @Inject private Logger logger;
@@ -61,6 +73,20 @@ public class BL4DEUtil {
         return this.logger;
     }
 
+    public String getRecentPlayersDataFile(){
+        return this.recentPlayersDataDir;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public SqlService getSql() {
+        return sql;
+    }
+
+
+
     @Listener
     public void onLoad(GameLoadCompleteEvent event){
         this.logger.info("BL4DEUtil has loaded.");
@@ -68,7 +94,42 @@ public class BL4DEUtil {
 
     @Listener
     public void onInit(GameInitializationEvent event){
+        // Check for config directory and do file stuff
+        if (!new File(configDir).exists()){
+            //noinspection ResultOfMethodCallIgnored
+            new File(configDir).mkdir();
+        }
+        if (!new File(recentPlayersDataDir).exists()){
+            try {
+                //noinspection ResultOfMethodCallIgnored
+                new File(recentPlayersDataDir).createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+                this.logger.info("Could not create/load player_info.data.");
+                this.logger.info("Disabling plugin.");
+                return;
+            }
+        }
+
         /* Command Register START */
+
+        // Register /GetCLW
+        // /getclw confirm
+        CommandSpec getCLWConfirm = CommandSpec.builder()
+                .description(Text.of("Get a Chunk Loading Ward in exchange for 3 emeralds."))
+                .permission("bl4de.getclw.confirm")
+                .executor(new GetCLWConfirm(this))
+                .build();
+        // /getclw
+        CommandSpec getCLW = CommandSpec.builder()
+                .description(Text.of("Show instructions to get Chunk Loading Ward"))
+                .permission("bl4de.getclw.base")
+                .child(getCLWConfirm, "confirm", "c")
+                .executor(new GetCLW())
+                .build();
+        this.game.getCommandManager().register(this, getCLW, "getclw", "getchunkloadingward");
+        this.logger.info("/GetCLW registered");
+
         // Register /blade
         // /blade debug
         CommandSpec bladeDebug = CommandSpec.builder()
@@ -91,7 +152,7 @@ public class BL4DEUtil {
                 .executor(new Blade())
                 .build();
         this.game.getCommandManager().register(this, blade, "blade", "bl4de");
-        this.logger.info("/blade registered");
+        this.logger.info("/Blade registered");
 
         // Register /ranks
         // /ranks LabRat
@@ -124,7 +185,7 @@ public class BL4DEUtil {
                 .executor(new Ranks())
                 .build();
         this.game.getCommandManager().register(this, ranks, "ranks", "rank");
-        this.logger.info("/ranks registered");
+        this.logger.info("/Ranks registered");
 
         // Register /GMC
         CommandSpec gmc = CommandSpec.builder()
@@ -143,14 +204,30 @@ public class BL4DEUtil {
                 .build();
         this.game.getCommandManager().register(this, gms, "gms");
         this.logger.info("/GMS registered");
+
+        // Register /LastOnline
+        CommandSpec lastOnline = CommandSpec.builder()
+                .description(Text.of("Show the last 10 players who have logged on."))
+                .permission("bl4de.lastonline.base")
+                .executor(new LastOnline())
+                .build();
+        this.game.getCommandManager().register(this, lastOnline, "lastonline", "lo");
+        this.logger.info("/LastOnline registered");
         /* Command Register END */
 
         // EventHandler
-        this.eventHandler = new BL4DEEventHandler(this);
+        this.eventHandler = new BL4DEListenerHandler(this);
+        // Give the file parse plugin object for logger and such
+        new LastOnlineFileParser(this);
     }
 
     @Listener
     public void onChangeBlockPlaceEvent(ChangeBlockEvent.Place event, @Root Player player){
+        this.eventHandler.handleEvent(event);
+    }
+
+    @Listener
+    public void onClientConnectionEvent(ClientConnectionEvent event){
         this.eventHandler.handleEvent(event);
     }
 }
