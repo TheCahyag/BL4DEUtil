@@ -11,7 +11,6 @@ import java.util.*;
 
 /**
  * File: LastOnlineFileParser.java
- *
  * @author Brandon Bires-Navel (brandonnavel@outlook.com)
  */
 public class LastOnlineFileParser {
@@ -19,7 +18,7 @@ public class LastOnlineFileParser {
     private static Logger logger;
     private static BL4DEUtil util;
 
-    private final static DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss z");
+    public final static DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss aa");
 
     /**
      * LastOnlineFileParser constructor
@@ -43,7 +42,7 @@ public class LastOnlineFileParser {
             try (Scanner in = new Scanner(file)) {
                 while (in.hasNextLine()) {
                     // Line format: PLAYER_NAME DATE
-                    String[] split = in.nextLine().split(" ");
+                    String[] split = in.nextLine().split("\\|");
                     players.put(parseDateIn(split[1]), split[0]);
                 }
                 in.close();
@@ -62,44 +61,47 @@ public class LastOnlineFileParser {
      * @param name - String - the name of the player
      */
     public static void logPlayerJoin(String name){
-        synchronized (LastOnlineFileParser.class){
-            Optional<Map<Date, String>> mapOptional = getRecentPlayerLogins();
-            Map<Date, String> data;
-            if (!mapOptional.isPresent()){
-                logger.info("No player entries were found. (It probably couldn't access the file)");
-                return;
-            }
-            data = mapOptional.get();
-            OUTER:
-            if (data.containsValue(name)){
-                for (Map.Entry<Date, String> entry :
-                        data.entrySet()) {
-                    if (entry.getValue().equals(name)){
-                        data.remove(entry.getKey());
-                        data.put(new Date(), name);
-                        break OUTER;
-                    }
-                }
-            } else {
-                data.put(new Date(), name);
-            }
-            writeChanges(data);
+        Optional<Map<Date, String>> mapOptional = getRecentPlayerLogins();
+        Map<Date, String> data;
+        if (!mapOptional.isPresent()){
+            logger.info("No player entries were found. (It probably couldn't access the file)");
+            new Throwable().printStackTrace();
+            return;
         }
+        data = mapOptional.get();
+        OUTER:
+        if (data.containsValue(name)){
+            for (Map.Entry<Date, String> entry :
+                    data.entrySet()) {
+                if (entry.getValue().equals(name)){
+                    data.remove(entry.getKey());
+                    data.put(new Date(), name);
+                    break OUTER;
+                }
+            }
+        } else {
+            data.put(new Date(), name);
+        }
+        writeChanges(data);
     }
 
     /**
      * writeChanges will open the given player data file and will re-write with the new data
      * @param map - Optional\<Map<Date, String>> map containing all players and their last join date
      */
-    private static void writeChanges(Map<Date, String> map){
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(util.getRecentPlayersDataFile()))){
-            for (Map.Entry<Date, String> entry :
-                    map.entrySet()) {
-                String line = entry.getValue() + " " + dateFormat.format(entry.getKey()) + "\n";
+    private static void writeChanges(Map<Date, String> map) {
+        synchronized (LastOnlineFileParser.class) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(util.getRecentPlayersDataFile()))) {
+                for (Map.Entry<Date, String> entry :
+                        map.entrySet()) {
+                    String line = entry.getValue() + "|" + dateFormat.format(entry.getKey()) + "\n";
+                    bw.write(line);
+                }
+                bw.close();
+            } catch (IOException e) {
+                logger.info("Ran into a problem when trying to write to the data file.");
+                e.printStackTrace();
             }
-        } catch (IOException e){
-            logger.info("Ran into a problem when trying to write to the data file.");
-            e.printStackTrace();
         }
     }
 
@@ -116,6 +118,6 @@ public class LastOnlineFileParser {
             logger.info("Failed to parse date. (This shouldn't happen)");
             e.printStackTrace();
         }
-        return dateToParse == null ? new Date() : dateToParse; // Last ditch effort to return a valid date
+        return dateToParse == null ? new Date() : dateToParse; // Last ditch effort if it can't parse the date (shouldn't happen tho)
     }
 }
