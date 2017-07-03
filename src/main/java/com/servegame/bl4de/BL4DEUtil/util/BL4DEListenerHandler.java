@@ -30,14 +30,14 @@ public class BL4DEListenerHandler {
         if (event instanceof ChangeBlockEvent.Place){
             if (!ChangeBlockEventPlaceEvent.handle((ChangeBlockEvent.Place) event)){
                 this.util.getLogger().info("Something went wrong with the ChangeBlockEvent.Place event handler.");
-                return;
             }
             return;
-        } else if (event instanceof ClientConnectionEvent){
+        } else if (event instanceof ClientConnectionEvent.Login){
             ClientConnectEvent.plugin = this.util;
-            if (!ClientConnectEvent.handle((ClientConnectionEvent) event)){
+            if (!ClientConnectEvent.handle((ClientConnectionEvent.Login) event)){
                 this.util.getLogger().info("Something went wrong with the ClientConnectionEvent event handler.");
             }
+            return;
         }
         this.util.getLogger().info("Instance not found.");
         new Throwable().printStackTrace();
