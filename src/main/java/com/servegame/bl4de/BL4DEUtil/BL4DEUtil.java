@@ -1,5 +1,3 @@
-
-
 package com.servegame.bl4de.BL4DEUtil;
 
 import com.google.inject.Inject;
@@ -227,7 +225,7 @@ public class BL4DEUtil {
     }
 
     @Listener
-    public void onClientConnectionEvent(ClientConnectionEvent event){
+    public void onClientConnectionEvent(ClientConnectionEvent.Login event){
         this.eventHandler.handleEvent(event);
     }
 }
