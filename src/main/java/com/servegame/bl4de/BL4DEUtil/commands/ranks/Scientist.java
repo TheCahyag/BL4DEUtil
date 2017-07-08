@@ -15,32 +15,47 @@ import org.spongepowered.api.text.format.TextColors;
 public class Scientist implements CommandExecutor {
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-        Text t1 = Text.of(TextColors.GRAY, "-----------------------");
-        Text t2 = Text.of(TextColors.WHITE, "[");
-        Text t3 = Text.of(TextColors.DARK_BLUE, "Scientist");
-        Text t4 = Text.of(TextColors.WHITE, "]");
-        Text t5 = Text.of(TextColors.GRAY, "---------------------\n");
-        Text t6 = Text.of(TextColors.AQUA, "Requirements");
-        Text t7 = Text.of(TextColors.WHITE, ": \n");
-        Text t8 = Text.of(TextColors.YELLOW, "   ➊ Donate ");
-        Text t9 = Text.of(TextColors.DARK_GREEN, "$");
-        Text t10 = Text.of(TextColors.WHITE, "15.00 ");
-        Text t11 = Text.of(TextColors.DARK_BLUE, "USD\n");
-        Text t12 = Text.of(TextColors.GREEN, "Benefits");
-        Text t13 = Text.of(TextColors.WHITE, ": \n");
-        Text t14 = Text.of(TextColors.DARK_RED, "   The following is subject to change\n");
-        Text t15 = Text.of(TextColors.DARK_RED, "   The following is still under development, these do \n   " +
-                "not reflect the final version of the rank\n");
-        Text t16 = Text.of(TextColors.YELLOW, "   ➊ Set three homes with /Sethome\n");
-        Text t17 = Text.of(TextColors.YELLOW, "   ➋ /Feed\n");
-        Text t18 = Text.of(TextColors.YELLOW, "   ➌ 2500 additional claim blocks\n");
-        Text t19 = Text.of(TextColors.YELLOW, "   ➍ /Back (on death)\n");
-        Text t20 = Text.of(TextColors.YELLOW, "   ➎ /Nickname\n");
-        Text t21 = Text.of(TextColors.YELLOW, "   ➏ /Kit Scientist\n");
-        Text t22 = Text.of(TextColors.GRAY, "----------------------------------------------------");
-        Text[] tmp = {t1, t2, t3, t4, t5, t6, t7, t8, t9, t10,
-                t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22};
-        Text message = Text.builder().append(tmp).build();
+        /*
+            -----------------------[Scientist]---------------------
+            Requirements:
+               ➊ Donate $15.00 USD
+            Benefits:
+               The following is subject to change
+               The following is still under development, these do
+               not reflect the final version of the rank
+               ➊ Set three homes with /Sethome
+               ➋ /Feed
+               ➌ 2500 additional claim blocks
+               ➍ /Back (on death)
+               ➎ /Nickname
+               ➏ /Kit Scientist
+            ----------------------------------------------------
+         */
+        Text message = Text.builder()
+                .append(Text.of(TextColors.GRAY, "-----------------------",
+                        TextColors.WHITE, "[",
+                        TextColors.DARK_BLUE, "Scientist",
+                        TextColors.WHITE, "]",
+                        TextColors.GRAY, "---------------------\n",
+                        TextColors.AQUA, "Requirements",
+                        TextColors.WHITE, ": \n",
+                        TextColors.YELLOW, "   ➊ Donate ",
+                        TextColors.DARK_GREEN, "$",
+                        TextColors.WHITE, "15.00 ",
+                        TextColors.DARK_BLUE, "USD\n",
+                        TextColors.GREEN, "Benefits",
+                        TextColors.WHITE, ": \n",
+                        TextColors.DARK_RED, "   The following is subject to change\n",
+                        TextColors.DARK_RED, "   The following is still under development, these do \n   " +
+                                "not reflect the final version of the rank\n",
+                        TextColors.YELLOW, "   ➊ Set three homes with /Sethome\n",
+                        TextColors.YELLOW, "   ➋ /Feed\n",
+                        TextColors.YELLOW, "   ➌ 2500 additional claim blocks\n",
+                        TextColors.YELLOW, "   ➍ /Back (on death)\n",
+                        TextColors.YELLOW, "   ➎ /Nickname\n",
+                        TextColors.YELLOW, "   ➏ /Kit Scientist\n",
+                        TextColors.GRAY, "----------------------------------------------------"))
+                .build();
         src.sendMessage(message);
         return CommandResult.success();
     }

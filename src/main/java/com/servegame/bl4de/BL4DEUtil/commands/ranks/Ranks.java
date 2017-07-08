@@ -18,43 +18,50 @@ public class Ranks implements CommandExecutor {
 
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-        Text t1 = Text.of(TextColors.GRAY, "----------------------------------------------------\n");
-        Text t2 = Text.of(TextColors.GREEN, "Rank");
-        Text t3 = Text.of(TextColors.WHITE, ": [");
-        Text t4 = Text.of(TextColors.AQUA, "LabRat");
-        Text t5 = Text.of(TextColors.WHITE, "]\n");
-        Text t6 = Text.of(TextColors.WHITE, "   /");
-        Text t7 = Text.builder("ranks labrat\n")
-                .color(TextColors.GREEN)
-                .style(TextStyles.UNDERLINE)
-                .onClick(TextActions.runCommand("/ranks labrat"))
-                .onHover(TextActions.showText(Text.of("Click here to suggest this command")))
+        /*
+            ----------------------------------------------------
+            Rank: [LabRat]
+               /ranks labrat
+            Rank: [Technician]
+               /ranks technician
+            Rank: [Scientist]
+               /ranks scientist
+            ----------------------------------------------------
+         */
+        Text message = Text.builder()
+                .append(Text.of(TextColors.GRAY, "----------------------------------------------------\n",
+                        TextColors.GREEN, "Rank",
+                        TextColors.WHITE, ": [",
+                        TextColors.AQUA, "LabRat",
+                        TextColors.WHITE, "]\n",
+                        TextColors.WHITE, "   /"))
+                .append(Text.builder()
+                        .append(Text.of(TextColors.GREEN, TextStyles.UNDERLINE, "ranks labrat\n"))
+                        .onClick(TextActions.runCommand("/ranks labrat"))
+                        .onHover(TextActions.showText(Text.of("Click here to suggest this command")))
+                        .build())
+                .append(Text.of(TextColors.GREEN, "Rank",
+                        TextColors.WHITE, ": [",
+                        TextColors.GOLD, "Technician",
+                        TextColors.WHITE, "]\n",
+                        TextColors.WHITE, "   /"))
+                .append(Text.builder()
+                        .append(Text.of(TextColors.GREEN, TextStyles.UNDERLINE, "ranks technician\n"))
+                        .onClick(TextActions.runCommand("/ranks technician"))
+                        .onHover(TextActions.showText(Text.of("Click here to suggest this command")))
+                        .build())
+                .append(Text.of(TextColors.GREEN, "Rank",
+                        TextColors.WHITE, ": [",
+                        TextColors.DARK_BLUE, "Scientist",
+                        TextColors.WHITE, "]\n",
+                        TextColors.WHITE, "   /"))
+                .append(Text.builder()
+                        .append(Text.of(TextColors.GREEN, TextStyles.UNDERLINE, "ranks scientist\n"))
+                        .onClick(TextActions.runCommand("/ranks scientist"))
+                        .onHover(TextActions.showText(Text.of("Click here to suggest this command")))
+                        .build())
+                .append(Text.of(TextColors.GRAY, "----------------------------------------------------"))
                 .build();
-        Text t8 = Text.of(TextColors.GREEN, "Rank");
-        Text t9 = Text.of(TextColors.WHITE, ": [");
-        Text t10 = Text.of(TextColors.GOLD, "Technician");
-        Text t11 = Text.of(TextColors.WHITE, "]\n");
-        Text t12 = Text.of(TextColors.WHITE, "   /");
-        Text t13 = Text.builder("ranks technician\n")
-                .color(TextColors.GREEN)
-                .style(TextStyles.UNDERLINE)
-                .onClick(TextActions.runCommand("/ranks technician"))
-                .onHover(TextActions.showText(Text.of("Click here to suggest this command")))
-                .build();
-        Text t14 = Text.of(TextColors.GREEN, "Rank");
-        Text t15 = Text.of(TextColors.WHITE, ": [");
-        Text t16 = Text.of(TextColors.DARK_BLUE, "Scientist");
-        Text t17 = Text.of(TextColors.WHITE, "]\n");
-        Text t18 = Text.of(TextColors.WHITE, "   /");
-        Text t19 = Text.builder("ranks scientist\n")
-                .color(TextColors.GREEN)
-                .style(TextStyles.UNDERLINE)
-                .onClick(TextActions.runCommand("/ranks scientist"))
-                .onHover(TextActions.showText(Text.of("Click here to suggest this command")))
-                .build();
-        Text t20 = Text.of(TextColors.GRAY, "----------------------------------------------------");
-        Text[] tmp = {t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20};
-        Text message = Text.builder().append(tmp).build();
         src.sendMessage(message);
         return CommandResult.success();
     }
