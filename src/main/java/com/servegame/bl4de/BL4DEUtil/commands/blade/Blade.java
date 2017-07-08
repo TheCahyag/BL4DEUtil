@@ -18,23 +18,22 @@ public class Blade implements CommandExecutor {
 
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-        Text t1 = Text.of(TextColors.GRAY, "----------------------------------------------------\n");
-        Text t2 = Text.of(TextColors.DARK_RED, "BL4DE");
-        Text t3 = Text.of(TextColors.DARK_GRAY, "Util\n");
-        Text t4 = Text.of(TextColors.BLUE, "Author(s)");
-        Text t5 = Text.of(TextColors.WHITE, ": ");
-        Text t6 = Text.of(TextColors.GOLD, "TheCahyag\n");
-        Text t7 = Text.of(TextColors.GREEN, "Commands");
-        Text t8 = Text.of(TextColors.WHITE, ": /");
-        Text t9 = Text.builder("blade commands\n")
-                .color(TextColors.GREEN)
-                .style(TextStyles.UNDERLINE)
-                .onClick(TextActions.runCommand("/blade commands"))
-                .onHover(TextActions.showText(Text.of("Click here to suggest this command.")))
+        Text message = Text.builder()
+                .append(Text.of(TextColors.GRAY, "----------------------------------------------------\n",
+                        TextColors.DARK_RED, "BL4DE",
+                        TextColors.DARK_GRAY, "Util\n",
+                        TextColors.BLUE, "Author(s)",
+                        TextColors.WHITE, ": ",
+                        TextColors.GOLD, "TheCahyag\n",
+                        TextColors.GREEN, "Commands",
+                        TextColors.WHITE, ": /"))
+                .append(Text.builder()
+                        .append(Text.of(TextColors.GREEN, TextStyles.UNDERLINE, "blade commands"))
+                        .onClick(TextActions.runCommand("/blade commands"))
+                        .onHover(TextActions.showText(Text.of("Click here to suggest this command.")))
+                        .build())
+                .append(Text.of(TextColors.GRAY, "----------------------------------------------------"))
                 .build();
-        Text t10 = Text.of(TextColors.GRAY, "----------------------------------------------------");
-        Text[] tmp = {t1, t2, t3, t4, t5, t6, t7, t8, t9, t10};
-        Text message = Text.builder().append(tmp).build();
         src.sendMessage(message);
         return CommandResult.success();
     }
