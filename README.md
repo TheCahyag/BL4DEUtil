@@ -21,9 +21,13 @@
 `bl4de.lastonline.base` - /LastOnline, /LO  
 
 ## TODO:
-* Make commands clickable in /GetCLW and /Blade ?
+* ~~Make commands clickable in /GetCLW and /Blade ?~~
 * Keep track of how many chunk loading wards each player has recieved and enable a limit
 * Allow to see the time a specific player was online (/LastOnline TheCahyag)
-* Add /GetCLW and /LastOnline to the /Blade ? commands
+* ~~Add /GetCLW and /LastOnline to the /Blade ? commands~~
 * Add functionality to the CLW check so if the player breaks a chunk loading ward that is supporting a AE2Stuff block the action is canceled, or all the AE2Stuff blocks are destroyed and placed in the inventory of the player
 * Add functionality to the /LO command and display near the time how long since the player has been on relative to the current time. (1 day ago, 3 hours ago, ... etc)
+* ~~Refactor old Text creation sections for most BL4DE commands~~
+* Look into whether I must be tracking UUIDs instead just the players name (if its worth it)
+* Consider making commands clickable in the /rank child commands
+* Log where people place chunk loadings and be able to call up the list
