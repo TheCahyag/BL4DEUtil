@@ -17,7 +17,7 @@ public class BladeToggleDebug implements CommandExecutor {
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         BL4DEUtil.debug = !BL4DEUtil.debug;
-        src.sendMessage(Text.of(TextColors.AQUA, "Debug mode has been set to: " + BL4DEUtil.debug));
+        src.sendMessage(Text.of(TextColors.AQUA, "Debug mode has been set to '" + BL4DEUtil.debug + "'"));
         return CommandResult.success();
     }
 }

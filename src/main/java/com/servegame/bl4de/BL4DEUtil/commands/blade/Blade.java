@@ -18,6 +18,13 @@ public class Blade implements CommandExecutor {
 
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
+        /*
+            ----------------------------------------------------
+            BL4DEUtil
+            Author(s): TheCahyag
+            Commands: /blade commands
+            ----------------------------------------------------
+         */
         Text message = Text.builder()
                 .append(Text.of(TextColors.GRAY, "----------------------------------------------------\n",
                         TextColors.DARK_RED, "BL4DE",
