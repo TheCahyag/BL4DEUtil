@@ -21,14 +21,15 @@ public class GMC implements CommandExecutor {
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         if (src instanceof Player){
             ((Player) src).offer(Keys.GAME_MODE, GameModes.CREATIVE);
-            Text t1 = Text.of(TextColors.GREEN, "Your gamemode was set to");
-            Text t2 = Text.of(TextColors.YELLOW, " creative");
-            Text t3 = Text.of(TextColors.GREEN, ".");
-            Text[] words = {t1, t2, t3};
-            src.sendMessage(Text.builder().append(words).build());
+            Text message = Text.builder()
+                    .append(Text.of(TextColors.GREEN, "Your gamemode was set to",
+                            TextColors.YELLOW, " creative",
+                            TextColors.GREEN, "."))
+                    .build();
+            src.sendMessage(message);
             return CommandResult.success();
         } else {
-            src.sendMessage(Text.builder("This command is meant to be ran by players only!").color(TextColors.DARK_RED).build());
+            src.sendMessage(Text.of(TextColors.DARK_RED, "This command is meant to be ran by players only!"));
             return CommandResult.empty();
         }
     }
