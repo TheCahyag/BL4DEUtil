@@ -26,7 +26,6 @@ import java.util.Optional;
  */
 public class GetCLWConfirm implements CommandExecutor {
     private Game game;
-    private SqlService sql;
 
     public GetCLWConfirm(BL4DEUtil util){
         this.game = util.getGame();
