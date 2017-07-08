@@ -7,7 +7,9 @@ import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
+import org.spongepowered.api.text.action.TextActions;
 import org.spongepowered.api.text.format.TextColors;
+import org.spongepowered.api.text.format.TextStyles;
 
 /**
  * File: GetCLW.java
@@ -22,9 +24,22 @@ public class GetCLW implements CommandExecutor {
             src.sendMessage(Text.of("This command is meant only for players."));
             return CommandResult.empty();
         }
-        src.sendMessage(Text.of(TextColors.AQUA,
-                "In exchange for 3 emeralds, you will receive one Chunk Loading Ward " +
-                        "(From ExtraUtils2). /GetCLW Confirm"));
+        /*
+            In exchange for 3 emeralds, you will receive one Chunk
+            Loading Ward (From ExtraUtils2) /GetCLW Confirm
+         */
+        Text message = Text.builder()
+                .append(Text.of(TextColors.AQUA, "In exchange for ",
+                        TextColors.DARK_BLUE, "3 ",
+                        TextColors.GREEN, "emeralds, ",
+                        TextColors.AQUA, "you will receive one Chunk Loading Ward (From ExtraUtils2) "))
+                .append(Text.builder()
+                        .append(Text.of(TextColors.AQUA, TextStyles.UNDERLINE, "/GetCLW Confirm"))
+                        .onClick(TextActions.runCommand("/GetCLW c"))
+                        .onHover(TextActions.showText(Text.of("Click here to suggest this command.")))
+                        .build())
+                .build();
+        src.sendMessage(message);
         return CommandResult.success();
     }
 }
