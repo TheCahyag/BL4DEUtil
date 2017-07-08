@@ -14,6 +14,9 @@ import java.util.*;
 
 /**
  * File: LastOnline.java
+ * LastOnline is a command that when executed will gather and store player's
+ * join dates into a TreeMap and print out the (at most) 10 most recent
+ * players who have been on the server.
  * @author Brandon Bires-Navel (brandonnavel@outlook.com)
  */
 public class LastOnline implements CommandExecutor {
@@ -38,7 +41,7 @@ public class LastOnline implements CommandExecutor {
             src.sendMessage(Text.of("Number of entries: " + entries.size()));
         }
         for (int i = entries.size() - 1; i >= boundary; i--) {
-            // Go threw 10 or less entries to print out as the most recently played players
+            // Go through 10 or less entries to print out as the most recently played players
 
             // Body of LastOnline message
             message = message.toBuilder()
