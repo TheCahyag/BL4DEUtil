@@ -15,7 +15,6 @@ import java.util.*;
 public class CLWLimitFileParser {
     private static BL4DEUtil util;
     private static Logger logger;
-    private static final int CLW_LIMIT = 5;
 
     public CLWLimitFileParser(BL4DEUtil plugin){
         util = plugin;
