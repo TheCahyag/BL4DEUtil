@@ -89,7 +89,7 @@ public class GetCLWConfirm implements CommandExecutor {
             int playersChunkLoaders = CLWLimitFileParser.getPlayersChunkLoaders(player.getName());
             if (playersChunkLoaders >= 5){
                 // Player has hit the limit
-                player.sendMessage(Text.of(TextColors.DARK_RED, "Unable to purchase chunk loader: The limit of five chunk loaders was exceeded "));
+                player.sendMessage(Text.of(TextColors.DARK_RED, "Unable to purchase chunk loader: The limit of five chunk loaders has been reached."));
             } else if (playersChunkLoaders == -1){
                 // An error has occurred trace back to CLWLimitFileParser.getPlayersChunkLoaders()
                 player.sendMessage(Text.of(TextColors.DARK_RED, "An error has occurred. Please report this to the admins."));
@@ -97,6 +97,7 @@ public class GetCLWConfirm implements CommandExecutor {
                 // Preform transaction
                 ItemStack item = ItemStack.of(type, 1);
                 player.getInventory().offer(item);
+                CLWLimitFileParser.logCLWPurchase(player.getName());
             }
         }
         return CommandResult.success();
