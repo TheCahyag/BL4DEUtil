@@ -14,6 +14,7 @@ import com.servegame.bl4de.BL4DEUtil.commands.ranks.Ranks;
 import com.servegame.bl4de.BL4DEUtil.commands.ranks.Scientist;
 import com.servegame.bl4de.BL4DEUtil.commands.ranks.Technician;
 import com.servegame.bl4de.BL4DEUtil.util.BL4DEListenerHandler;
+import com.servegame.bl4de.BL4DEUtil.util.FileIO.CLWLimitFileParser;
 import com.servegame.bl4de.BL4DEUtil.util.FileIO.LastOnlineFileParser;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
@@ -49,7 +50,8 @@ public class BL4DEUtil {
     private SqlService sql;
 
     private final String configDir = "./config/bl4deutil";
-    private final String recentPlayersDataDir = "./config/bl4deutil/recent_player_logins.dat";
+    private final String recentPlayersDataDir = configDir + "/recent_player_logins.dat";
+    private final String CLWCounterDataDir = configDir + "/clw_count.dat";
 
     @Inject private Game game;
     @Inject private Logger logger;
@@ -71,7 +73,11 @@ public class BL4DEUtil {
         return this.logger;
     }
 
-    public String getRecentPlayersDataFile(){
+    public String getCLWCounterDataDir() {
+        return this.CLWCounterDataDir;
+    }
+
+    public String getRecentPlayersDataDir(){
         return this.recentPlayersDataDir;
     }
 
@@ -103,7 +109,18 @@ public class BL4DEUtil {
                 new File(recentPlayersDataDir).createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
-                this.logger.info("Could not create/load player_info.data.");
+                this.logger.info("Could not create/load player_info.dat.");
+                this.logger.info("Disabling plugin.");
+                return;
+            }
+        }
+        if (!new File(CLWCounterDataDir).exists()){
+            try {
+                //noinspection ResultOfMethodCallIgnored
+                new File(CLWCounterDataDir).createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+                this.logger.info("Could not create/load clw_count.dat.");
                 this.logger.info("Disabling plugin.");
                 return;
             }
@@ -150,7 +167,7 @@ public class BL4DEUtil {
                 .executor(new Blade())
                 .build();
         this.game.getCommandManager().register(this, blade, "blade", "bl4de");
-        this.logger.info("/Blade registered");
+        this.logger.info("/blade registered");
 
         // Register /ranks
         // /ranks LabRat
@@ -183,7 +200,7 @@ public class BL4DEUtil {
                 .executor(new Ranks())
                 .build();
         this.game.getCommandManager().register(this, ranks, "ranks", "rank");
-        this.logger.info("/Ranks registered");
+        this.logger.info("/ranks registered");
 
         // Register /GMC
         CommandSpec gmc = CommandSpec.builder()
@@ -217,6 +234,7 @@ public class BL4DEUtil {
         this.eventHandler = new BL4DEListenerHandler(this);
         // Give the file parse plugin object for logger and such
         new LastOnlineFileParser(this);
+        new CLWLimitFileParser(this);
     }
 
     @Listener
