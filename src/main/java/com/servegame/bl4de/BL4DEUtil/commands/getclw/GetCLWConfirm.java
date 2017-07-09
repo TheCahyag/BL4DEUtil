@@ -28,6 +28,7 @@ import java.util.Optional;
  */
 public class GetCLWConfirm implements CommandExecutor {
     private Game game;
+    private final int CLW_LIMIT = 5;
 
     public GetCLWConfirm(BL4DEUtil util){
         this.game = util.getGame();
@@ -87,7 +88,7 @@ public class GetCLWConfirm implements CommandExecutor {
                 return CommandResult.empty();
             }
             int playersChunkLoaders = CLWLimitFileParser.getPlayersChunkLoaders(player.getName());
-            if (playersChunkLoaders >= 5){
+            if (playersChunkLoaders >= CLW_LIMIT){
                 // Player has hit the limit
                 player.sendMessage(Text.of(TextColors.DARK_RED, "Unable to purchase chunk loader: The limit of five chunk loaders has been reached."));
             } else if (playersChunkLoaders == -1){
@@ -97,6 +98,7 @@ public class GetCLWConfirm implements CommandExecutor {
                 // Preform transaction
                 ItemStack item = ItemStack.of(type, 1);
                 player.getInventory().offer(item);
+                player.sendMessage(Text.of(TextColors.AQUA, "Exchange complete. Remaining CLWs: " + (CLW_LIMIT - (playersChunkLoaders + 1))));
                 CLWLimitFileParser.logCLWPurchase(player.getName());
             }
         }
