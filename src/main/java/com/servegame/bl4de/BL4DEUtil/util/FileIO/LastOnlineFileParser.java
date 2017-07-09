@@ -35,15 +35,15 @@ public class LastOnlineFileParser {
      * @return Optional\<Map<Date, String>> map containing all players and their last join date
      */
     public static Optional<Map<Date, String>> getRecentPlayerLogins(){
-        File file = new File(util.getRecentPlayersDataFile());
+        File file = new File(util.getRecentPlayersDataDir());
         // The map is <Date, String> so the tree map will sort the map automatically by date
         Map<Date, String> players = new TreeMap<>();
         synchronized (LastOnlineFileParser.class) {
             try (Scanner in = new Scanner(file)) {
                 while (in.hasNextLine()) {
-                    // Line format: PLAYER_NAME DATE
-                    String[] split = in.nextLine().split("\\|");
-                    players.put(parseDateIn(split[1]), split[0]);
+                    // Line format: PLAYER_NAME|DATE
+                    String[] tokens = in.nextLine().split("\\|");
+                    players.put(parseDateIn(tokens[1]), tokens[0]);
                 }
                 in.close();
             } catch (FileNotFoundException e) {
@@ -91,7 +91,7 @@ public class LastOnlineFileParser {
      */
     private static void writeChanges(Map<Date, String> map) {
         synchronized (LastOnlineFileParser.class) {
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(util.getRecentPlayersDataFile()))) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(util.getRecentPlayersDataDir()))) {
                 for (Map.Entry<Date, String> entry :
                         map.entrySet()) {
                     String line = entry.getValue() + "|" + dateFormat.format(entry.getKey()) + "\n";
