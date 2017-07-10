@@ -22,7 +22,8 @@
 
 ## TODO:
 * ~~Make commands clickable in /GetCLW and /Blade ?~~
-* Keep track of how many chunk loading wards each player has recieved and enable a limit
+* ~~Keep track of how many chunk loading wards each player has received and enable a limit~~
+* Allow a permission to by pass this limit/ Ooooorrrrr set a dynamic permission that will define a players limit (bl4de.getclw.limit.10)
 * Allow to see the time a specific player was online (/LastOnline TheCahyag)
 * ~~Add /GetCLW and /LastOnline to the /Blade ? commands~~
 * Add functionality to the CLW check so if the player breaks a chunk loading ward that is supporting a AE2Stuff block the action is canceled, or all the AE2Stuff blocks are destroyed and placed in the inventory of the player
