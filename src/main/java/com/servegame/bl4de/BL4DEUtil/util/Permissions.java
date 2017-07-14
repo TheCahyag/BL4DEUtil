@@ -7,18 +7,21 @@ package com.servegame.bl4de.BL4DEUtil.util;
  */
 public class Permissions {
 
-    // Staff commands
+    // Staff permissions
     public static final String COMMAND_BLADE_DEBUG          = "bl4de.debug.base";
     public static final String COMMAND_GMC                  = "bl4de.gamemode.creative";
     public static final String COMMAND_GMS                  = "bl4de.gamemode.survival";
+    public static final String COMMAND_GETCLW_UNLIMITED     = "bl4de.getclw.unlimited";
 
-    // User commands
+
+    // User permissions
     public static final String COMMAND_BLADE                = "bl4de.base";
     public static final String COMMAND_BLADE_HELP           = "bl4de.base";
     public static final String COMMAND_GETCLW               = "bl4de.getclw.base";
     public static final String COMMAND_GETCLW_CONFIRM       = "bl4de.getclw.confirm";
+    public static final String COMMAND_GETCLW_LIMIT         = "bl4de.getclw.limit.";
     public static final String COMMAND_RANK                 = "bl4de.ranks.base";
     public static final String COMMAND_LASTONLINE           = "bl4de.lastonline.base";
-    public static final String COMMAND_LASTONLINE_PLAYERm    = "bl4de.lastonline.player";
+    public static final String COMMAND_LASTONLINE_PLAYER    = "bl4de.lastonline.player";
 
 }
