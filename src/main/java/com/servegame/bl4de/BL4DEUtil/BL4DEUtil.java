@@ -1,7 +1,6 @@
 package com.servegame.bl4de.BL4DEUtil;
 
 import com.google.inject.Inject;
-import com.servegame.bl4de.BL4DEUtil.commands.CommndTest;
 import com.servegame.bl4de.BL4DEUtil.commands.lastonline.LastOnline;
 import com.servegame.bl4de.BL4DEUtil.commands.blade.Blade;
 import com.servegame.bl4de.BL4DEUtil.commands.blade.BladeHelp;
@@ -22,6 +21,7 @@ import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
+import org.spongepowered.api.command.args.GenericArguments;
 import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.config.DefaultConfig;
 import org.spongepowered.api.entity.living.player.Player;
@@ -90,8 +90,6 @@ public class BL4DEUtil {
     public SqlService getSql() {
         return sql;
     }
-
-
 
     @Listener
     public void onLoad(GameLoadCompleteEvent event){
@@ -226,23 +224,16 @@ public class BL4DEUtil {
         CommandSpec lastOnline = CommandSpec.builder()
                 .description(Text.of("Show the last 10 players who have logged on."))
                 .permission(Permissions.COMMAND_LASTONLINE)
+                .arguments(GenericArguments.optional(GenericArguments.string(Text.of("player"))))
                 .executor(new LastOnline())
                 .build();
         this.game.getCommandManager().register(this, lastOnline, "lastonline", "lo");
         this.logger.info("/LastOnline registered");
-
-        // Register /Test
-        CommandSpec test = CommandSpec.builder()
-                .description(Text.of("Test"))
-                .executor(new CommndTest())
-                .build();
-        this.game.getCommandManager().register(this, test, "test");
-        this.logger.info("/Test registered");
         /* Command Register END */
 
         // EventHandler
         this.eventHandler = new BL4DEListenerHandler(this);
-        // Give the file parse plugin object for logger and such
+        // Give the file parse plugin objects for logger and such
         new LastOnlineFileParser(this);
         new CLWLimitFileParser(this);
     }
