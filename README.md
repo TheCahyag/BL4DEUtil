@@ -24,11 +24,13 @@
 * ~~Make commands clickable in /GetCLW and /Blade ?~~
 * ~~Keep track of how many chunk loading wards each player has received and enable a limit~~
 * Allow a permission to by pass this limit/ Ooooorrrrr set a dynamic permission that will define a players limit (bl4de.getclw.limit.10)
-* Allow to see the time a specific player was online (/LastOnline TheCahyag)
+* ~~Allow to see the time a specific player was online (/LastOnline TheCahyag)~~
 * ~~Add /GetCLW and /LastOnline to the /Blade ? commands~~
 * Add functionality to the CLW check so if the player breaks a chunk loading ward that is supporting a AE2Stuff block the action is canceled, or all the AE2Stuff blocks are destroyed and placed in the inventory of the player
 * Add functionality to the /LO command and display near the time how long since the player has been on relative to the current time. (1 day ago, 3 hours ago, ... etc)
 * ~~Refactor old Text creation sections for most BL4DE commands~~
 * Look into whether I must be tracking UUIDs instead just the players name (if its worth it)
-* Consider making commands clickable in the /rank child commands
+* ~~Consider making commands clickable in the /rank child commands~~ nah gonna pass on this
 * Log where people place chunk loadings and be able to call up the list
+* Make BL4DEUtil debug boolean private
+* Look into creating an abstract and/or interface based hierarchical systems for commands
