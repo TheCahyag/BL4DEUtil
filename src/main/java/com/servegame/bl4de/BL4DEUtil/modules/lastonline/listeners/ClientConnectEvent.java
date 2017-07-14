@@ -1,7 +1,7 @@
-package com.servegame.bl4de.BL4DEUtil.listener;
+package com.servegame.bl4de.BL4DEUtil.modules.lastonline.listeners;
 
 import com.servegame.bl4de.BL4DEUtil.BL4DEUtil;
-import com.servegame.bl4de.BL4DEUtil.util.FileIO.LastOnlineFileParser;
+import com.servegame.bl4de.BL4DEUtil.modules.lastonline.fileparser.LastOnlineFileParser;
 import org.spongepowered.api.event.network.ClientConnectionEvent;
 
 import java.util.Optional;

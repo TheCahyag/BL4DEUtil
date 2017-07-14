@@ -1,4 +1,4 @@
-package com.servegame.bl4de.BL4DEUtil.commands;
+package com.servegame.bl4de.BL4DEUtil.modules.gamemode.commands;
 
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;

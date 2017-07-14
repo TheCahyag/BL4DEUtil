@@ -1,8 +1,8 @@
 package com.servegame.bl4de.BL4DEUtil.util;
 
 import com.servegame.bl4de.BL4DEUtil.BL4DEUtil;
-import com.servegame.bl4de.BL4DEUtil.listener.ChangeBlockEventPlaceEvent;
-import com.servegame.bl4de.BL4DEUtil.listener.ClientConnectEvent;
+import com.servegame.bl4de.BL4DEUtil.modules.getclw.listeners.ChangeBlockEventPlaceEvent;
+import com.servegame.bl4de.BL4DEUtil.modules.lastonline.listeners.ClientConnectEvent;
 import org.spongepowered.api.event.Event;
 import org.spongepowered.api.event.block.ChangeBlockEvent;
 import org.spongepowered.api.event.network.ClientConnectionEvent;

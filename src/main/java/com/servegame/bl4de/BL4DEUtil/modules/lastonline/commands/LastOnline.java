@@ -1,15 +1,12 @@
-package com.servegame.bl4de.BL4DEUtil.commands.lastonline;
+package com.servegame.bl4de.BL4DEUtil.modules.lastonline.commands;
 
 import com.servegame.bl4de.BL4DEUtil.BL4DEUtil;
-import com.servegame.bl4de.BL4DEUtil.commands.BL4DECommand;
-import com.servegame.bl4de.BL4DEUtil.util.FileIO.LastOnlineFileParser;
+import com.servegame.bl4de.BL4DEUtil.modules.lastonline.fileparser.LastOnlineFileParser;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
-import org.spongepowered.api.command.spec.CommandSpec;
-import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 
@@ -22,7 +19,7 @@ import java.util.*;
  * players who have been on the server.
  * @author Brandon Bires-Navel (brandonnavel@outlook.com)
  */
-public class LastOnline extends BL4DECommand implements CommandExecutor {
+public class LastOnline implements CommandExecutor {
 
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {

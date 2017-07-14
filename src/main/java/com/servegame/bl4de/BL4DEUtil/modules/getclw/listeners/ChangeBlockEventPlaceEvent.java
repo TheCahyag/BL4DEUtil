@@ -1,4 +1,4 @@
-package com.servegame.bl4de.BL4DEUtil.listener;
+package com.servegame.bl4de.BL4DEUtil.modules.getclw.listeners;
 
 import com.servegame.bl4de.BL4DEUtil.BL4DEUtil;
 import org.spongepowered.api.block.BlockType;

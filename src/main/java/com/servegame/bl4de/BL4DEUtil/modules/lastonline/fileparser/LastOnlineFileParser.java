@@ -1,4 +1,4 @@
-package com.servegame.bl4de.BL4DEUtil.util.FileIO;
+package com.servegame.bl4de.BL4DEUtil.modules.lastonline.fileparser;
 
 import com.servegame.bl4de.BL4DEUtil.BL4DEUtil;
 import org.slf4j.Logger;
