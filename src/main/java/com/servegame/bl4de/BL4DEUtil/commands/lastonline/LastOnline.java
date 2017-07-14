@@ -1,12 +1,15 @@
-package com.servegame.bl4de.BL4DEUtil.commands;
+package com.servegame.bl4de.BL4DEUtil.commands.lastonline;
 
 import com.servegame.bl4de.BL4DEUtil.BL4DEUtil;
+import com.servegame.bl4de.BL4DEUtil.commands.BL4DECommand;
 import com.servegame.bl4de.BL4DEUtil.util.FileIO.LastOnlineFileParser;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
+import org.spongepowered.api.command.spec.CommandSpec;
+import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 
@@ -19,10 +22,22 @@ import java.util.*;
  * players who have been on the server.
  * @author Brandon Bires-Navel (brandonnavel@outlook.com)
  */
-public class LastOnline implements CommandExecutor {
+public class LastOnline extends BL4DECommand implements CommandExecutor {
 
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
+        Optional<String> playerNameOptional = args.getOne("player");
+
+        // Woah Intellij, I like this
+        // Check if a player's name was specified
+        return playerNameOptional.map(player -> displayPlayer(src, player)).orElseGet(() -> displayPlayers(src));
+    }
+
+    /**
+     * displayPlayers will display the 10 most recent players and the associated times of their last presence
+     * @param src - command source
+     */
+    private CommandResult displayPlayers(CommandSource src){
         Optional<Map<Date, String>> optionalPlayerData = LastOnlineFileParser.getRecentPlayerLogins();
         if (!optionalPlayerData.isPresent()){
             src.sendMessage(Text.of(TextColors.AQUA, "No player entries were found. (It probably couldn't access the file)"));
@@ -59,6 +74,40 @@ public class LastOnline implements CommandExecutor {
     }
 
     /**
+     * displayPlayer will display the time a given player was online
+     * @param src - command source
+     * @param name - player to display
+     */
+    private CommandResult displayPlayer(CommandSource src, String name){
+        Optional<Map<Date, String>> optionalPlayerData = LastOnlineFileParser.getRecentPlayerLogins();
+        if (!optionalPlayerData.isPresent()){
+            src.sendMessage(Text.of(TextColors.AQUA, "No player entries were found. (It probably couldn't access the file)"));
+            return CommandResult.empty();
+        }
+        Map<Date, String> playerData = optionalPlayerData.get();
+        Date possibleDate = null;
+        for (Map.Entry<Date, String> entry :
+                playerData.entrySet()) {
+            // Go through entries and find the player we are looking for,
+            // then set the date they were last on
+            if (entry.getValue().equals(name)){
+                possibleDate = entry.getKey();
+            }
+        }
+        if (possibleDate == null){
+            // Null check on possibleDate, if the entry wasn't found the date defaults as null
+            src.sendMessage(Text.of(TextColors.DARK_RED, "The player '" + name + "' was not found, or doesn't have an entry."));
+            return CommandResult.success();
+        }
+        String possession = "'s";
+        if (name.endsWith("s") || name.endsWith("S")){
+            possession = "'";
+        }
+        src.sendMessage(Text.of(TextColors.AQUA, name + possession + " last login timestamp was: ", TextColors.GREEN, timeToText(possibleDate)));
+        return CommandResult.success();
+    }
+
+    /**
      * playerTimeToText will take the name and date of a player's login and convert
      * it to a {@link Text} object with a desired format
      * @param name - name of player
@@ -67,11 +116,18 @@ public class LastOnline implements CommandExecutor {
      */
     private Text playerTimeToText(String name, Date date){
         return Text.builder()
-                .append(Text.of(TextColors.GREEN, LastOnlineFileParser.dateFormat.format(date), "    "))
+                .append(Text.of(TextColors.GREEN, timeToText(date), "    "))
                 .append(Text.of(TextColors.AQUA, name, "\n"))
                 .build();
     }
 
-
+    /**
+     * timeToText will take a date and convert it to a {@link Text} object
+     * @param date {@link Date}
+     * @return {@link Text}
+     */
+    private Text timeToText(Date date){
+        return Text.builder(LastOnlineFileParser.dateFormat.format(date)).build();
+    }
 }
 
