@@ -1,4 +1,5 @@
 # BL4DEUtil
+**Not being developed ATM**
 ## Commands:
 /Blade - Prints info message regarding the plugin<br />
 /Blade help - Prints commands and their respective usages<br />
